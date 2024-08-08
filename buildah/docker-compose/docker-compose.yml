@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  buildah:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    container_name: test_buildah
+    privileged: true
+    volumes:
+      - "/shared_folder/kxs-deploy:/shared_folder/kxs-deploy"
+    devices:
+      - "/dev/fuse:/dev/fuse:rw"
+    security_opt:
+      - seccomp=unconfined
+      - apparmor=unconfined
+    stdin_open: true
+    tty: true
+    command: /bin/bash
